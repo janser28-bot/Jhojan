@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda Serrano</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== Pantalla de acceso ===== -->
+  <section id="screen-login">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="ember"></div>
+        <h1>Agenda Serrano</h1>
+        <p>Inicia sesión para ver las tareas del equipo</p>
+      </div>
+      <form id="form-login">
+        <div class="field">
+          <label for="login-email">Correo</label>
+          <input type="email" id="login-email" required autocomplete="username">
+        </div>
+        <div class="field">
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary">Entrar</button>
+        <div id="login-error" class="login-error hidden"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== App ===== -->
+  <section id="screen-app" class="hidden">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <div class="ember-sm"></div>
+        <h1>Agenda Serrano</h1>
+      </div>
+      <div class="topbar-user">
+        <img id="user-avatar" class="avatar" src="" alt="Avatar">
+        <button id="btn-settings" class="icon-btn" title="Ajustes">⚙️</button>
+        <button id="btn-logout" class="icon-btn" title="Salir">↪</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="ember-progress">
+        <div class="ember-progress-head">
+          <span>Avance del equipo</span>
+          <span id="progress-label">0 / 0 completadas</span>
+        </div>
+        <div class="ember-track">
+          <div id="ember-fill" class="ember-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">Todas</button>
+          <button class="filter-btn" data-filter="pending">Pendientes</button>
+          <button class="filter-btn" data-filter="completed">Completadas</button>
+        </div>
+        <button id="btn-new-task" class="btn-new">+ Nueva tarea</button>
+      </div>
+
+      <div id="task-list" class="task-list"></div>
+      <div id="empty-state" class="empty-state hidden">
+        <div class="ember-sm" style="margin:0 auto 1.2rem; border-radius:50%; background:linear-gradient(145deg,var(--amber),var(--brick));"></div>
+        <p>No hay tareas todavía. Crea la primera con "+ Nueva tarea".</p>
+      </div>
+    </main>
+  </section>
+
+  <!-- ===== Modal: nueva/editar tarea ===== -->
+  <div id="modal-task" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <h2 id="modal-task-title">Nueva tarea</h2>
+      <form id="form-task">
+        <input type="hidden" id="task-id">
+        <div class="field">
+          <label for="task-title">Título</label>
+          <input type="text" id="task-title" required maxlength="120">
+        </div>
+        <div class="field">
+          <label for="task-desc">Descripción (opcional)</label>
+          <textarea id="task-desc" maxlength="500"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+          <button type="submit" class="btn-primary" style="width:auto; padding:1.1rem 2rem;">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Modal: ajustes ===== -->
+  <div id="modal-settings" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <h2>Ajustes de perfil</h2>
+      <form id="form-settings">
+        <img id="settings-avatar-preview" class="avatar-preview" src="" alt="Vista previa avatar">
+        <div class="field">
+          <label for="settings-nombre">Nombre</label>
+          <input type="text" id="settings-nombre" required maxlength="60">
+        </div>
+        <div class="field">
+          <label for="settings-apellidos">Apellidos</label>
+          <input type="text" id="settings-apellidos" required maxlength="60">
+        </div>
+        <div class="field">
+          <label for="settings-avatar">URL de imagen de avatar</label>
+          <input type="url" id="settings-avatar" placeholder="https://...">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
+          <button type="submit" class="btn-primary" style="width:auto; padding:1.1rem 2rem;">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
