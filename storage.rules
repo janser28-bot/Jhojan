@@ -1,0 +1,31 @@
+rules_version = '2';
+
+// ============================================================
+// Reglas de seguridad de Storage — Agenda Serrano
+// Pega este contenido en Firebase Console → Storage → pestaña "Rules"
+// (nota: necesitas haber activado Storage primero: Firebase Console
+// → Compilación → Storage → "Comenzar", plan Blaze pay-as-you-go,
+// que igual tiene una franja gratuita amplia para este volumen).
+// ============================================================
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Avatares: cualquier autenticado puede leer todos los avatares
+    // (se muestran en las tarjetas de tarea); cada quien solo sube
+    // el suyo propio.
+    match /avatars/{userId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId
+                   && request.resource.size < 3 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // Adjuntos de tareas: compartidos, cualquier autenticado lee y
+    // sube (igual que las tareas, que son compartidas por el equipo).
+    match /tasks/{userId}/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+                   && request.resource.size < 15 * 1024 * 1024;
+    }
+  }
+}

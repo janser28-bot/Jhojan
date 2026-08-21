@@ -20,6 +20,14 @@ lista para publicar gratis en GitHub Pages, con reporte diario por correo a las 
 > Estas claves de `firebaseConfig` **no son secretas** — están pensadas para vivir en el
 > navegador. Lo que de verdad protege tus datos son las reglas de Firestore del paso 5.
 
+## 1.5 Activar Firebase Storage (fotos de avatar y archivos adjuntos)
+
+1. Firebase Console → **Compilación → Storage** → "Comenzar". Te pedirá pasar al
+   plan **Blaze** (pago por uso) — es normal, Google lo exige para Storage, pero
+   tiene una franja gratuita mensual amplia (5 GB de almacenamiento, 1 GB/día de
+   descarga) más que suficiente para 2-5 personas subiendo fotos y documentos.
+2. Pega el contenido de `storage.rules` en la pestaña **Rules** de Storage → Publicar.
+
 ## 2. Publicar en GitHub Pages
 
 1. Crea un repositorio nuevo en GitHub y sube todo el contenido de esta carpeta.
@@ -67,7 +75,11 @@ scripts/send-daily-report.js      → arma y envía el correo diario
 
 ## Modelo de datos en Firestore
 
-- `tasks/{id}` — `title`, `description`, `completed`, `createdAt`, `completedAt`, `createdBy` (uid).
-  Compartida: todos los usuarios autenticados la ven y la editan.
-- `users/{uid}` — `nombre`, `apellidos`, `avatarUrl`, `email`. Cada quien edita solo el suyo,
-  pero todos pueden leer los demás (para mostrar nombre y avatar en las tareas).
+- `tasks/{id}` — `title`, `description`, `completed`, `createdAt`, `completedAt`, `createdBy` (uid),
+  `dueDate` (YYYY-MM-DD o null), `priority` (alta/media/baja), `tags` (array de texto),
+  `assignedTo` (uid o null), `attachmentUrl`, `attachmentName`, `subtasks` (array de
+  `{title, completed}`). Compartida: todos los usuarios autenticados la ven y la editan.
+- `users/{uid}` — `nombre`, `apellidos`, `avatarUrl` (ahora se sube como archivo a Storage,
+  ya no se pega una URL a mano), `email`. Cada quien edita solo el suyo, pero todos pueden
+  leer los demás (para mostrar nombre y avatar en las tareas).
+- **Storage**: `avatars/{uid}/...` (fotos de perfil) y `tasks/{uid}/...` (adjuntos de tareas).

@@ -348,3 +348,55 @@ main { flex: 1; padding: 2.4rem; max-width: 96rem; margin: 0 auto; width: 100%; 
   .task-card { flex-wrap: wrap; }
   .task-side { flex-direction: row; align-items: center; margin-left: 0; width: 100%; justify-content: space-between; }
 }
+
+/* ---------- Campos en fila ---------- */
+.field-row { display: flex; gap: 1.2rem; }
+.field-row .field { flex: 1; }
+.field input[type="file"] { padding: 0.9rem 1.2rem; }
+.file-current, .file-hint { font-size: 1.25rem; color: var(--ink-soft); margin-top: 0.4rem; }
+
+/* ---------- Subtareas (editor en el modal) ---------- */
+.subtask-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 0.8rem; }
+.subtask-edit-row {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--ivory); border: 0.1rem solid var(--line);
+  border-radius: 0.7rem; padding: 0.7rem 1rem; font-size: 1.35rem;
+}
+.subtask-edit-row button { background: none; color: var(--brick); font-size: 1.3rem; }
+.subtask-add { display: flex; gap: 0.8rem; }
+.subtask-add input { flex: 1; padding: 1rem 1.2rem; border: 0.15rem solid var(--line); border-radius: 0.9rem; background: var(--ivory); }
+.subtask-add button { padding: 0 1.6rem; border-radius: 0.9rem; background: var(--paper); font-weight: 700; font-size: 1.6rem; }
+
+/* ---------- Subtareas (vista en tarjeta) ---------- */
+.subtask-progress { font-size: 1.25rem; color: var(--ink-soft); margin-top: 0.6rem; }
+.subtask-view-list { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem; }
+.subtask-view-row { display: flex; align-items: center; gap: 0.7rem; font-size: 1.35rem; }
+.subtask-view-row span.done { text-decoration: line-through; color: var(--ink-soft); }
+
+/* ---------- Etiquetas y badges ---------- */
+.task-title-row { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.task-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.tag-chip {
+  background: var(--paper); color: var(--brick-dark);
+  font-size: 1.2rem; font-weight: 600;
+  padding: 0.3rem 0.8rem; border-radius: 1rem;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 1.2rem; font-weight: 600;
+  padding: 0.3rem 0.8rem; border-radius: 1rem;
+  text-decoration: none;
+}
+.badge-priority-alta { background: #FBE4DD; color: var(--brick-dark); }
+.badge-priority-media { background: #FCEFD8; color: #9A6A1F; }
+.badge-priority-baja { background: #E4EFE1; color: var(--green); }
+.badge-assignee { background: var(--paper); color: var(--ink-soft); }
+.badge-due { background: #E4EFE1; color: var(--green); }
+.badge-overdue { background: #FBE4DD; color: var(--brick-dark); }
+.badge-attachment { background: var(--paper); color: var(--brick-dark); }
+.badge-calendar { background: var(--paper); color: #3C6E9E; }
+.badge-attachment:hover, .badge-calendar:hover { background: var(--line); }
+
+@media (max-width: 640px) {
+  .field-row { flex-direction: column; gap: 0; }
+}

@@ -61,6 +61,7 @@
           <button class="filter-btn active" data-filter="all">Todas</button>
           <button class="filter-btn" data-filter="pending">Pendientes</button>
           <button class="filter-btn" data-filter="completed">Completadas</button>
+          <button class="filter-btn" data-filter="mine">Asignadas a mí</button>
         </div>
         <button id="btn-new-task" class="btn-new">+ Nueva tarea</button>
       </div>
@@ -87,6 +88,50 @@
           <label for="task-desc">Descripción (opcional)</label>
           <textarea id="task-desc" maxlength="500"></textarea>
         </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="task-due">Fecha límite (opcional)</label>
+            <input type="date" id="task-due">
+          </div>
+          <div class="field">
+            <label for="task-priority">Prioridad</label>
+            <select id="task-priority">
+              <option value="baja">Baja</option>
+              <option value="media" selected>Media</option>
+              <option value="alta">Alta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="task-tags">Etiquetas (separadas por coma)</label>
+            <input type="text" id="task-tags" placeholder="obra, urgente, compras">
+          </div>
+          <div class="field">
+            <label for="task-assignee">Responsable</label>
+            <select id="task-assignee">
+              <option value="">Sin asignar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="task-file">Adjuntar archivo (imagen, documento, audio o video — opcional)</label>
+          <input type="file" id="task-file" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx">
+          <div id="task-file-current" class="file-current hidden"></div>
+        </div>
+
+        <div class="field">
+          <label>Subtareas (opcional)</label>
+          <div id="subtask-list" class="subtask-list"></div>
+          <div class="subtask-add">
+            <input type="text" id="subtask-input" placeholder="Escribe una subtarea y presiona +">
+            <button type="button" id="btn-add-subtask" class="btn-secondary">+</button>
+          </div>
+        </div>
+
         <div class="modal-actions">
           <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
           <button type="submit" class="btn-primary" style="width:auto; padding:1.1rem 2rem;">Guardar</button>
@@ -110,8 +155,9 @@
           <input type="text" id="settings-apellidos" required maxlength="60">
         </div>
         <div class="field">
-          <label for="settings-avatar">URL de imagen de avatar</label>
-          <input type="url" id="settings-avatar" placeholder="https://...">
+          <label for="settings-avatar-file">Foto de avatar</label>
+          <input type="file" id="settings-avatar-file" accept="image/*">
+          <p id="settings-avatar-status" class="file-hint"></p>
         </div>
         <div class="modal-actions">
           <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
