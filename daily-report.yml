@@ -2,8 +2,8 @@ name: Reporte diario Agenda Serrano
 
 on:
   schedule:
-    # 11:00 UTC = 6:00 a.m. hora de Colombia (UTC-5, sin horario de verano)
-    - cron: '0 11 * * *'
+    # 10:30 UTC = 5:30 a.m. hora de Colombia (UTC-5, sin horario de verano)
+    - cron: '30 10 * * *'
   workflow_dispatch: {} # permite ejecutarlo manualmente desde la pestaña Actions
 
 jobs:
@@ -19,14 +19,14 @@ jobs:
           node-version: '20'
 
       - name: Instalar dependencias
-        working-directory: scripts
         run: npm install
 
       - name: Enviar reporte
-        working-directory: scripts
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           REPORT_TO: janser28@gmail.com
         run: node send-daily-report.js
+        # Nota: package.json y send-daily-report.js deben estar
+        # en la raíz del repositorio (mismo nivel que index.html).
